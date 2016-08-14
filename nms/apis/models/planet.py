@@ -102,12 +102,14 @@ def create_new_name(planet):
         
         if num_words == 0:
             name = system_suf
+            name = name.upper()
         elif num_words == 1:
             name = words[0].name
+            name = name.capitalize()
         else:
             for word in words:
                 name += word.short
-        name = name.capitalize()
+            name = name.capitalize()
         logger.info(name)
         
         planets = get_all_by_name(name)
