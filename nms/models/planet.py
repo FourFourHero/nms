@@ -33,9 +33,9 @@ class Planet(BaseModel):
         app_label = 'nms'
 
     def __unicode__(self):
-        return str(self.id) + ':' + self.name()
+        return str(self.id) + ':' + self.full_name()
             
-    def name(self):
+    def full_name(self):
         return self.name + ' ' + self.roman_number
         
     def __json__(self):

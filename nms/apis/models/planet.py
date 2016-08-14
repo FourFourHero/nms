@@ -79,17 +79,17 @@ def create_new_name(planet):
             
         if neutral:
             name += ' ' + neutral.capitalize()
-        logger.info(name)        
+        logger.info(name)
         
         exotic = ''
         if planet.exotic_calium:
-            exotic += 'ca'
+            exotic += 'cal'
         if planet.exotic_murrine:
-            exotic += 'mu'
+            exotic += 'mur'
         if planet.exotic_omegon:
-            exotic += 'om'
+            exotic += 'ome'
         if planet.exotic_radnox:
-            exotic += 'ra'
+            exotic += 'rad'
         
         if exotic:
             name += ' ' + exotic.capitalize()
@@ -97,7 +97,7 @@ def create_new_name(planet):
                 
         trade = ''
         if planet.trade_albumen:
-            trade += 'alb'
+            trade += 'albu'
         if planet.trade_gravitino:
             trade += 'grav'
 
