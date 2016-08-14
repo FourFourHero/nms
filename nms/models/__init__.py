@@ -9,6 +9,7 @@ from system import System
 from planet import Planet
 
 import nms.apis.models.system as system_api
+import nms.apis.models.planet as planet_api
 
 logger = logging.getLogger(__name__)
 
@@ -45,14 +46,14 @@ def model_encode_verbose(obj):
 @receiver(pre_save, sender=System)
 def set_system_name(sender, **kwargs):
     system = kwargs['instance']
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    logger.info('PRE SAVE SYSTEM')
-    #system = sender
-    system.name = system_api.create_new_name(system.player)
-    logger.info('receiver system name:' + system.name)
-    #system.save()
+    if not system.name:
+        system.name = system_api.create_new_name(system.player)
+        logger.info('new system name:' + system.name)
+    
+@receiver(pre_save, sender=Planet)
+def set_planet_name(sender, **kwargs):
+    planet = kwargs['instance']
+    if not planet.name:
+        planet.name = planet_api.create_new_name(planet.system)
+        logger.info('new planet name:' + planet.name)
+        

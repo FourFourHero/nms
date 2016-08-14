@@ -1,8 +1,5 @@
 import logging
 
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-
 from nms.models import Planet
 import nms.apis.color as color_api
 import nms.apis.feeling as feeling_api
@@ -107,14 +104,3 @@ def create_new_name(system):
         count += 1
         
     raise Exception('tried 1000 times to get a new name and failed')
-    
-###
-### Pre Save Receiver
-###
-
-@receiver(pre_save, sender=Planet)
-def set_planet_name(sender, instance, *args, **kwargs):
-    planet = instance
-    planet.name = create_new_name(planet.system)
-    logger.info('receiver planet name:' + planet.name)
-    
