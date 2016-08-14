@@ -9,7 +9,7 @@ class SystemManager(models.Manager):
 
 class System(BaseModel):
     player = models.ForeignKey('Player', null=False)
-    name = models.CharField(max_length=256, null=False)
+    name = models.CharField(max_length=256, default='New System', null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     objects = SystemManager()

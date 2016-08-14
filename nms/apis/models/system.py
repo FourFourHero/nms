@@ -1,4 +1,6 @@
 import logging
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from nms.models import System
 import nms.apis.color as color_api
 import nms.apis.feeling as feeling_api
@@ -6,14 +8,10 @@ import nms.apis.animal as animal_api
 
 logger = logging.getLogger(__name__)
 
-def create(player):
+def create(player, name):
     system = System()
     system.player = player
-    try:
-        system.name = create_new_name(player)
-    except:
-        logger.exception('error creating new system')
-        return None
+    system.name = name
     logger.info('creating system: ' + system.name)
     update(system)
     return system
@@ -30,7 +28,7 @@ def get_by_name(name):
     except:
         logger.exception('error getting system')
     return None
-
+    
 def create_new_name(player):
     count = 0
     while count < 1000:
@@ -46,3 +44,13 @@ def create_new_name(player):
         count += 1
         
     raise Exception('tried 1000 times to get a new name and failed')
+    
+###
+### Pre Save Receiver
+###
+
+@receiver(pre_save, sender=System)
+def set_system_name(sender, instance, *args, **kwargs):
+    system = instance
+    system.name = create_new_name(system.player)
+    logger.info('receiver system name:' + system.name)

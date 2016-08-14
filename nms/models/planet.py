@@ -9,7 +9,7 @@ class PlanetManager(models.Manager):
 
 class Planet(BaseModel):
     system = models.ForeignKey('System', null=False)
-    name = models.CharField(max_length=256, null=False)
+    name = models.CharField(max_length=256, default='New Planet', null=True)
     neutral_gold = models.BooleanField(default=False, null=False)
     neutral_emeril = models.BooleanField(default=False, null=False)
     neutral_nickel = models.BooleanField(default=False, null=False)
