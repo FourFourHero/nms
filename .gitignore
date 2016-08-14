@@ -1,5 +1,5 @@
 venv
-mft.db
+nms.db
 dump.rdb
 celerybeat-schedule.db
 *.sqlite3
