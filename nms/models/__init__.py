@@ -1,5 +1,8 @@
 import logging
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 # do imports
 from player import Player
 from system import System
