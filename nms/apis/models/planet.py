@@ -36,6 +36,13 @@ def get_by_system(system):
         logger.exception('error getting planet')
     return []
 
+def get_all_by_name(name):
+    try:
+        return list(Planet.objects.filter(name=name))
+    except:
+        logger.exception('error getting planets')
+    return []
+
 def create_new_name(planet):
     system = planet.system
     count = 0
@@ -45,8 +52,8 @@ def create_new_name(planet):
         system_suf = system.name
         system_suf = system_suf.split(' ')
         system_suf = system_suf[0][0] + system_suf[1][0] + system_suf[2][0]
-        
-        name = system_suf
+        logging.info(system_suf)
+        #name = system_suf
         logger.info(name)
         
         neutral = ''
@@ -64,7 +71,7 @@ def create_new_name(planet):
             neutral += 'ni'
             
         if neutral:
-            name = ' ' + neutral.capitalize()
+            name += ' ' + neutral.capitalize()
         logger.info(name)        
         
         exotic = ''
@@ -89,12 +96,12 @@ def create_new_name(planet):
 
         if trade:
             name += ' ' + trade.capitalize()
-        logger.info(name)   
+        logger.info(name)           
+
+        planets = get_all_by_name(name)
+        num_planets = len(planets)
         
-        pis = get_by_system(system)
-        np = len(pis)
-        
-        roman_num = roman_api.toRoman(np + 1)
+        roman_num = roman_api.toRoman(num_planets + 1)
         name += ' ' + roman_num
         logger.info(name)
         
