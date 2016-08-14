@@ -15,7 +15,7 @@ class Planet(BaseModel):
     neutral_nickel = models.BooleanField(default=False, null=False)
     neutral_aluminium = models.BooleanField(default=False, null=False)    
     neutral_copper = models.BooleanField(default=False, null=False)
-    neutral_iridium = models.BooleanField(default=False, null=False)    
+    neutral_iridium = models.BooleanField(default=False, null=False)  
     silicate_chrysonite = models.BooleanField(default=False, null=False)
     exotic_calium = models.BooleanField(default=False, null=False)        
     exotic_omegon = models.BooleanField(default=False, null=False)
