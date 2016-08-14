@@ -124,7 +124,7 @@ def create_new_name(planet):
     
     raise Exception('tried 1000 times to get a new name and failed')
 
-class Resource(Object):
+class Resource(object):
     name = None
     short = None
 
