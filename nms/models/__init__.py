@@ -5,6 +5,10 @@ from player import Player
 from system import System
 from planet import Planet
 
+import nms.apis.models.system as system_api
+
+logger = logging.getLogger(__name__)
+
 def model_encode(obj):
     enc = None
     try:
@@ -30,3 +34,20 @@ def model_encode_verbose(obj):
         return enc
 
     raise TypeError(repr(obj) + " is not JSON serializable")
+    
+###
+### Pre Save Receiver
+###
+
+@receiver(pre_save, sender=System)
+def set_system_name(sender, system, *args, **kwargs):
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    system.name = system_api.create_new_name(system.player)
+    logger.info('receiver system name:' + system.name)
+    

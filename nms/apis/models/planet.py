@@ -11,14 +11,10 @@ import nms.apis.roman as roman_api
 
 logger = logging.getLogger(__name__)
 
-def create(system):
+def create(system, name):
     planet = Planet()
     planet.system = system
-    try:
-        planet.name = create_new_name(system)
-    except:
-        logger.exception('error creating new planet')
-        return None
+    planet.name = name
     logger.info('creating planet: ' + planet.name)
     update(planet)
     return planet
