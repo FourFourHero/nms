@@ -43,7 +43,7 @@ def model_encode_verbose(obj):
 ###
 
 @receiver(pre_save, sender=System)
-def set_system_name(sender, system, *args, **kwargs):
+def set_system_name(sender, **kwargs):
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
@@ -51,6 +51,7 @@ def set_system_name(sender, system, *args, **kwargs):
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
+    system = sender
     system.name = system_api.create_new_name(system.player)
     logger.info('receiver system name:' + system.name)
     
