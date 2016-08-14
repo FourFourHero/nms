@@ -51,6 +51,13 @@ def create_new_name(player):
 
 @receiver(pre_save, sender=System)
 def set_system_name(sender, instance, *args, **kwargs):
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')
+    logger.info('PRE SAVE SYSTEM')                        
     system = instance
     system.name = create_new_name(system.player)
     logger.info('receiver system name:' + system.name)
