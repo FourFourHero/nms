@@ -1,6 +1,6 @@
 import logging
 
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # do imports
@@ -44,6 +44,7 @@ def model_encode_verbose(obj):
 
 @receiver(pre_save, sender=System)
 def set_system_name(sender, **kwargs):
+    system = kwargs['instance']
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
@@ -51,7 +52,7 @@ def set_system_name(sender, **kwargs):
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
     logger.info('PRE SAVE SYSTEM')
-    system = sender
+    #system = sender
     system.name = system_api.create_new_name(system.player)
     logger.info('receiver system name:' + system.name)
-    
+    #system.save()
