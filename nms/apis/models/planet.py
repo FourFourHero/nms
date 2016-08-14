@@ -29,7 +29,7 @@ def get_by_name(name):
         logger.exception('error getting planet')
     return None
 
-def get_by_full_name(name):
+def get_by_full_name(name, roman_number):
     try:
         return Planet.objects.get(name=name, roman_number=roman_number)
     except:
