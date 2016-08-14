@@ -54,6 +54,8 @@ def set_system_name(sender, **kwargs):
 def set_planet_name(sender, **kwargs):
     planet = kwargs['instance']
     if planet.name == 'New Planet':
-        planet.name = planet_api.create_new_name(planet)
+        name, roman_number = planet_api.create_new_name(planet)
+        planet.name = name
+        planet.roman_number = roman_number
         logger.info('new planet name:' + planet.name)
         

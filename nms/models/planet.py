@@ -10,6 +10,7 @@ class PlanetManager(models.Manager):
 class Planet(BaseModel):
     system = models.ForeignKey('System', null=False)
     name = models.CharField(max_length=256, default='New Planet', null=True)
+    roman_number = models.CharField(max_length=16, default='I', null=True)
     neutral_gold = models.BooleanField(default=False, null=False)
     neutral_emeril = models.BooleanField(default=False, null=False)
     neutral_nickel = models.BooleanField(default=False, null=False)
@@ -32,13 +33,17 @@ class Planet(BaseModel):
         app_label = 'nms'
 
     def __unicode__(self):
-        return str(self.id) + ':' + self.name
+        return str(self.id) + ':' + self.name()
             
+    def name(self):
+        return self.name + ' ' + self.roman_number
+        
     def __json__(self):
         json = {}
         json['id'] = self.id
         json['system'] = self.system
         json['name'] = self.name
+        json['roman_number'] = self.roman_number
         json['neutral_gold'] = self.neutral_gold
         json['neutral_emeril'] = self.neutral_emeril
         json['neutral_nickel'] = self.neutral_nickel

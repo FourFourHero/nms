@@ -29,6 +29,13 @@ def get_by_name(name):
         logger.exception('error getting planet')
     return None
 
+def get_by_full_name(name):
+    try:
+        return Planet.objects.get(name=name, roman_number=roman_number)
+    except:
+        logger.exception('error getting planet')
+    return None
+
 def get_by_system(system):
     try:
         return list(Planet.objects.filter(system=system))
@@ -96,21 +103,18 @@ def create_new_name(planet):
 
         if trade:
             name += ' ' + trade.capitalize()
-        logger.info(name)           
+        logger.info(name)
 
-        pure_name = name.rsplit(' ', 1)[0]
-        logger.info('pure name: ' + pure_name)
-        planets = get_all_by_name(pure_name)
+        planets = get_all_by_name(name)
         num_planets = len(planets)
         
-        roman_num = roman_api.toRoman(num_planets + 1)
-        name += ' ' + roman_num
-        logger.info(name)
+        roman_number = roman_api.toRoman(num_planets + 1)
+        logger.info(name + ' ' + roman_number)
         
-        logger.info('checking planet name: ' + name)
-        planet = get_by_name(name)
+        logger.info('checking planet name: ' + name + ' ' + roman_number)
+        planet = get_by_full_name(name, roman_number)
         if not planet:
-            return name
+            return name, roman_number
         count += 1
         
     raise Exception('tried 1000 times to get a new name and failed')
