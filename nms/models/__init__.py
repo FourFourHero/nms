@@ -46,14 +46,14 @@ def model_encode_verbose(obj):
 @receiver(pre_save, sender=System)
 def set_system_name(sender, **kwargs):
     system = kwargs['instance']
-    if not system.name:
+    if system.name == 'New System':
         system.name = system_api.create_new_name(system.player)
         logger.info('new system name:' + system.name)
     
 @receiver(pre_save, sender=Planet)
 def set_planet_name(sender, **kwargs):
     planet = kwargs['instance']
-    if not planet.name:
+    if planet.name == 'New Planet':
         planet.name = planet_api.create_new_name(planet.system)
         logger.info('new planet name:' + planet.name)
         
