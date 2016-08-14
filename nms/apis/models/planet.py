@@ -106,7 +106,7 @@ def create_new_name(planet):
             name = words[0].name
         else:
             for word in words:
-                name += word
+                name += word.short
         name = name.capitalize()
         logger.info(name)
         
