@@ -34,9 +34,10 @@ def get_by_system(system):
         return list(Planet.objects.filter(system=system))
     except:
         logger.exception('error getting planet')
-    return None
+    return []
 
-def create_new_name(system):
+def create_new_name(planet):
+    system = planet.system
     count = 0
     while count < 1000:
         name = ''
