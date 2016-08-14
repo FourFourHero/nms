@@ -1,0 +1,10 @@
+venv
+mft.db
+dump.rdb
+celerybeat-schedule.db
+*.sqlite3
+*.pyc
+*.DS_Store
+*.db
+staticfiles
+settings_local.py
