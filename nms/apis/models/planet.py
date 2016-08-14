@@ -98,7 +98,9 @@ def create_new_name(planet):
             name += ' ' + trade.capitalize()
         logger.info(name)           
 
-        planets = get_all_by_name(name)
+        pure_name = name.rsplit(' ', 1)[0]
+        logger.info('pure name: ' + pure_name)
+        planets = get_all_by_name(pure_name)
         num_planets = len(planets)
         
         roman_num = roman_api.toRoman(num_planets + 1)
