@@ -50,17 +50,17 @@ def create_new_name(planet):
         logger.info(name)
         
         neutral = ''
-        if planet.resource_aluminium:
+        if planet.neutral_aluminium:
             neutral += 'al'
-        if planet.resource_copper:
+        if planet.neutral_copper:
             neutral += 'co'
-        if planet.resource_emeril:
+        if planet.neutral_emeril:
             neutral += 'em'
-        if planet.resource_gold:
+        if planet.neutral_gold:
             neutral += 'go'
-        if planet.resource_iridium:
+        if planet.neutral_iridium:
             neutral += 'ir'
-        if planet.resource_nickel:
+        if planet.neutral_nickel:
             neutral += 'ni'
             
         if neutral:
