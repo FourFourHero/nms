@@ -21,7 +21,7 @@ def update(planet):
 
 def delete(planet):
     planet.delete()
-    
+
 def get_by_name(name):
     try:
         return Planet.objects.get(name=name)
@@ -63,48 +63,53 @@ def create_new_name(planet):
         #name = system_suf
         logger.info(name)
         
-        neutral = ''
+        neutral = []
         if planet.neutral_aluminium:
-            neutral += 'al'
+            neutral.append(alu)
         if planet.neutral_copper:
-            neutral += 'co'
+            neutral.append(cop)
         if planet.neutral_emeril:
-            neutral += 'em'
+            neutral.append(eme)
         if planet.neutral_gold:
-            neutral += 'go'
+            neutral.append(gold)
         if planet.neutral_iridium:
-            neutral += 'ir'
+            neutral.append(iri)
         if planet.neutral_nickel:
-            neutral += 'ni'
-            
-        if neutral:
-            name += ' ' + neutral.capitalize()
-        logger.info(name)
-        
-        exotic = ''
-        if planet.exotic_calium:
-            exotic += 'cal'
-        if planet.exotic_murrine:
-            exotic += 'mur'
-        if planet.exotic_omegon:
-            exotic += 'ome'
-        if planet.exotic_radnox:
-            exotic += 'rad'
-        
-        if exotic:
-            name += ' ' + exotic.capitalize()
-        logger.info(name)
+            neutral.append(ni)
                 
-        trade = ''
+        silicate = []
+        if planet.silicate_chrysonite:
+            silicate.append(chrys)
+                
+        exotic = []
+        if planet.exotic_calium:
+            exotic.append(cal)
+        if planet.exotic_murrine:
+            exotic.append(mur)
+        if planet.exotic_omegon:
+            exotic.append(omeg)
+        if planet.exotic_radnox:
+            exotic.append(rad)
+                
+        trade = []
         if planet.trade_albumen:
-            trade += 'albu'
+            trade.append(albu)
         if planet.trade_gravitino:
-            trade += 'grav'
+            trade.append(grav)
 
-        if trade:
-            name += ' ' + trade.capitalize()
+        words = neutral + silicate + exotic + trade
+        num_words = len(words)
+        
+        if num_words == 0:
+            name = system_suf
+        elif num_words == 1:
+            name = words[0].name
+        else:
+            for word in words:
+                name += word
+        name = name.capitalize()
         logger.info(name)
-
+        
         planets = get_all_by_name(name)
         num_planets = len(planets)
         
@@ -116,5 +121,49 @@ def create_new_name(planet):
         if not planet:
             return name, roman_number
         count += 1
-        
+    
     raise Exception('tried 1000 times to get a new name and failed')
+
+class Resource(Object):
+    name = None
+    short = None
+
+alu = Resource()
+alu.name = 'aluminium'
+alu.short = 'alu'
+cop = Resource()
+cop.name = 'copper'
+cop.short = 'cop'
+eme = Resource()
+eme.name = 'emeril'
+eme.short = 'emer'
+gold = Resource()
+gold.name = 'gold'
+gold.short = 'go'
+iri = Resource()
+iri.name = 'iridium'
+iri.short = 'irid'
+ni = Resource()
+ni.name = 'nickel'
+ni.short = 'ni'
+chrys = Resource()
+chrys.name = 'chyrsonite'
+chrys.short = 'chrys'
+cal = Resource()
+cal.name = 'calium'
+cal.short = 'cal'
+mur = Resource()
+mur.name = 'murrine'
+mur.short = 'mur'
+omeg = Resource()
+omeg.name = 'omegon'
+omeg.short = 'omeg'
+rad = Resource()
+rad.name = 'radnox'
+rad.short = 'rad'
+grav = Resource()
+grav.name = 'gravitino'
+grav.short = 'grav'
+albu = Resource()
+albu.name = 'albumen'
+albu.short = 'albu'
