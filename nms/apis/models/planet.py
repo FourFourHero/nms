@@ -96,6 +96,8 @@ def create_new_name(planet):
             trade.append(albu)
         if planet.trade_gravitino:
             trade.append(grav)
+        if planet.trade_sac_venom:
+            trade.append(sac)
 
         words = neutral + silicate + exotic + trade
         num_words = len(words)
@@ -169,3 +171,6 @@ grav.short = 'grav'
 albu = Resource()
 albu.name = 'albumen'
 albu.short = 'albu'
+sac = Resource()
+sac.name = 'venom'
+sac.short = 'ven'

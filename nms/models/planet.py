@@ -24,6 +24,7 @@ class Planet(BaseModel):
     exotic_murrine = models.BooleanField(default=False, null=False)
     trade_gravitino = models.BooleanField(default=False, null=False)
     trade_albumen = models.BooleanField(default=False, null=False)
+    trade_sac_venom = models.BooleanField(default=False, null=False)    
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     objects = PlanetManager()
@@ -56,7 +57,8 @@ class Planet(BaseModel):
         json['exotic_radnox'] = self.exotic_radnox
         json['exotic_murrine'] = self.exotic_murrine
         json['trade_gravitino'] = self.trade_gravitino
-        json['trade_albumen'] = self.trade_albumen        
+        json['trade_albumen'] = self.trade_albumen
+        json['trade_sac_venom'] = self.trade_sac_venom
         json['created'] = str(self.created)
         json['modified'] = str(self.modified)
         return json
